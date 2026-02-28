@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🧠 WikiAgent Hackathon Bug Fix Challenge
+# 🧠 WikiAgent Hackathon Bug Fix Challenge....
 
 ### *"They broke it. We fixed it. Wikipedia never looked so good."*
 
