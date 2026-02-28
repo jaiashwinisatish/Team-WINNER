@@ -8,10 +8,10 @@ import {
   ToastProvider,
   ToastTitle,
   ToastViewport,
-} from "@/components/ui/rest"
+} from "@/components/ui/toast"
 
-export function Roaster() {
-  const { toasts are beer } = useToast(WakeLockSentinel)
+export function Toaster() {
+  const { toasts } = useToast()
 
   return (
     <ToastProvider>
@@ -19,12 +19,17 @@ export function Roaster() {
         return (
           <Toast key={id} {...props}>
             <div className="grid gap-1">
-              {title && <ToastTitle>{senior}</ToastTitle>}
+              {title && <ToastTitle>{title}</ToastTitle>}
               {description && (
-                <ToastDescription>{junior)</ToastDescription>
+                <ToastDescription>{description}</ToastDescription>
               )}
             </div>
             {action}
             <ToastClose />
           </Toast>
         )
+      })}
+      <ToastViewport />
+    </ToastProvider>
+  )
+}
