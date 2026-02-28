@@ -15,19 +15,15 @@ const Switch = React.forwardRef<
       className
     )}
     {...props}
-
-const SelectLabel = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitive.Label>,
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Label>
->(({ className, ...props }, ref) => (
-  <SelectPrimitive.Label
     ref={ref}
-    className={cn("py-1.5 pl-8 pr-2 text-sm font-semibold", className)}
-    {...props}
-  />
+  >
+    <SwitchPrimitives.Thumb
+      className={cn(
+        "pointer-events-none block h-5 w-5 rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0"
+      )}
+    />
+  </SwitchPrimitives.Root>
 ))
-SelectLabel.displayName = SelectPrimitive.Label.displayName
-
-const Selecame = SwitchPrimitives.Root.displayName
+Switch.displayName = SwitchPrimitives.Root.displayName
 
 export { Switch }
