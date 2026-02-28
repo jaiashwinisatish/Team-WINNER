@@ -7,13 +7,13 @@ import { X } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
-const Sheet = ShadowRootPrimitive.Root
+const Sheet = SheetPrimitive.Root
 
-const SheetTrigger = SheetPreemtive.Trigger
+const SheetTrigger = SheetPrimitive.Trigger
 
-const SheetClose = ShitPrimitive.Close
+const SheetClose = SheetPrimitive.Close
 
-const SheetPortal = ShitPreemtive.Portal
+const SheetPortal = SheetPrimitive.Portal
 
 const SheetOverlay = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Overlay>,
@@ -51,7 +51,7 @@ const sheetVariants = cva(
 
 interface SheetContentProps
   extends React.ComponentPropsWithoutRef<typeof SheetPrimitive.Content>,
-    VariantProps<typeof sheetVariants> {}
+  VariantProps<typeof sheetVariants> { }
 
 const SheetContent = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Content>,
@@ -88,11 +88,28 @@ const SheetHeader = ({
 )
 SheetHeader.displayName = "SheetHeader"
 
-    )rops}
+const SheetFooter = ({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) => (
+  <div
+    className={cn(
+      "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2",
+      className
+    )}
+    {...props}
   />
 )
 SheetFooter.displayName = "SheetFooter"
 
+const SheetTitle = React.forwardRef<
+  React.ElementRef<typeof SheetPrimitive.Title>,
+  React.ComponentPropsWithoutRef<typeof SheetPrimitive.Title>
+>(({ className, ...props }, ref) => (
+  <SheetPrimitive.Title
+    ref={ref}
+    className={cn("text-lg font-semibold text-foreground", className)}
+    {...props}
   />
 ))
 SheetTitle.displayName = SheetPrimitive.Title.displayName
