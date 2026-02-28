@@ -1,46 +1,28 @@
-ffffffffffffffffffffffffffftttttttttttttttttt111111111ttttttttffffffffffffffffffffff
-fffffffffffffffffffttt111111111111111111111111111111111111111111ttffffffffffffffffff
-fffffffffffffffttt11111111111111111111111111111111111111111111111111tfffffffffffffff
-fffffffffffftt11111111111111111111111111111111111111111111111111111111tfffffffffffff
-fffffffffLft111111111111111111111111111111111111111111111111111111111111tLffffffffff
-fffffffLf11111111111111111111111111111111111111111111111111111111111111111fLffffffff
-ffffffL1111111111111111111111111i:::::::ii1111111111111111111111111111111111Lfffffff
-fffffL1111111111111111111i:,,,,,,,,,,,,,,,,,,:i111111111111111111111111111111Lffffff
-ffffL1111111111111111i:,,,,,,,,,,,,,,,,,,,,,,,,,,:i111111111111111111111111111Lfffff
-ffff11111111111111i:,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,:i1111111111111111111111111ffff
-fff1111111111111i,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,i111111111111111111111111fff
-ff111111111111i,,,,,,,,,,,,,:::::::::::::::,,,,,,,,,,,,,,i11111111111111111111111ff
-f11111111111i,,,,,,,,:::::i1111tttttttttttt11i:,,,,,,,,,,,i11111111111111111111111f
-t1111111111i,,,,,,,:::i11ttttfffffffffffffffff1i:,,,,,,,,,,,i1111111111111111111111t
-1111111111i,,,,,,::i11ttfffffffffffffffffffffff1i,,,,,,,,,,,,i1111111111111111111111
-111111111i,,,,,,::i1tfffffffffffffffffffffffffff1i,,,,,,,,,,,,i111111111111111111111
-111111111:,,,,,::i1tfffffffffffffffffffffffffffff1:,,,,,,,,,,,::i1111111111111111111
-11111111i,,,,,::i1tffffffffffffffffffffffffffffft1:,,,,,,,,,,,,,:i111111111111111111
-11111111:,,,,,::i1tfffffttt1111111111111ttffffftt1:,,,,,,,,,,,,,,:111111111111111111
-11111111:,,,,,::i1ttt11iiiiiiiiiiiiiiiiiii11ttttt1:,,,,,,,,,,,,,,:111111111111111111
-11111111:,,,,,::iiiii,,,,,::::::::::::::,,,,iiiiii:,,,,,,,,,,,,,,:111111111111111111
-11111111:,,,,,:::::,,,,:::i1111111111111i:,,,,,,,,,,,,,,,,,,,,,,,:111111111111111111
-11111111:,,,,,,,,,,,,,i1ttfffffffffffffff1i:,,,,,,,,,,,,,,,,,,,,,:111111111111111111
-11111111:,,,,,,,,,,,:1tfffffffffffffffffff1i,,,,,,,,,,,,,,,,,,,,,:111111111111111111
-11111111:,,,,,,,,,,,i1tffffffffffffffffffft1:,,,,,,,,,,,,,,,,,,,,:111111111111111111
-11111111:,,,,,,,,,,,::i11ttfffffffffffftt11i:,,,,,,,,,,,,,,,,,,,,:111111111111111111
-11111111:,,,,,,,,,,,,,,,,::i1111111111ii::,,,,,,,,,,,,,,,,,,,,,,,:111111111111111111
-11111111:,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,:111111111111111111
-11111111i,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,:111111111111111111
-111111111:,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,:111111111111111111
-111111111i,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,:1111111111111111111
-1111111111i,,,,,,,,,,,,,,,::i11111111i:,,,,,,,,,,,,,,,,,,,,,,,,,i1111111111111111111
-t1111111111i,,,,,,,,,,,,,i1ttffffffftt1:,,,,,,,,,,,,,,,,,,,,,,,i1111111111111111111t
-f11111111111i,,,,,,,,,,,,i1tffffffffft1:,,,,,,,,,,,,,,,,,,,,,,i11111111111111111111f
-ff111111111111i,,,,,,,,,,,::i1111111i::,,,,,,,,,,,,,,,,,,,,,,i111111111111111111111ff
-fff1111111111111i,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,i1111111111111111111111fff
-ffff11111111111111i:,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,:i111111111111111111111111ffff
-ffffL1111111111111111i:,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,:i11111111111111111111111111Lfffff
-fffffL111111111111111111i:,,,,,,,,,,,,,,,,,,,,,,,,:i1111111111111111111111111111Lffffff
-ffffffL111111111111111111111i:,,,,,,,,,,,,,,,,:i1111111111111111111111111111111Lfffffff
-fffffffLf11111111111111111111111111111111111111111111111111111111111111111111fLffffffff
-fffffffffLft11111111111111111111111111111111111111111111111111111111111111tLffffffffff
-fffffffffffftt1111111111111111111111111111111111111111111111111111111111tfffffffffffff
-fffffffffffffffttt11111111111111111111111111111111111111111111111111tfffffffffffffff
-fffffffffffffffffffttt111111111111111111111111111111111111111111ttffffffffffffffffff
-ffffffffffffffffffffffffffftttttttttttttttttt111111111ttttttttffffffffffffffffffffff
+"use client"
+
+import * as React from "react"
+import * as SliderPrimitive from "@radix-ui/react-slider"
+
+import { cn } from "@/lib/utils"
+
+const Slider = React.forwardRef<
+    React.ElementRef<typeof SliderPrimitive.Root>,
+    React.ComponentPropsWithoutRef<typeof SliderPrimitive.Root>
+>(({ className, ...props }, ref) => (
+    <SliderPrimitive.Root
+        ref={ref}
+        className={cn(
+            "relative flex w-full touch-none select-none items-center",
+            className
+        )}
+        {...props}
+    >
+        <SliderPrimitive.Track className="relative h-2 w-full grow overflow-hidden rounded-full bg-secondary">
+            <SliderPrimitive.Range className="absolute h-full bg-primary" />
+        </SliderPrimitive.Track>
+        <SliderPrimitive.Thumb className="block h-5 w-5 rounded-full border-2 border-primary bg-background ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50" />
+    </SliderPrimitive.Root>
+))
+Slider.displayName = SliderPrimitive.Root.displayName
+
+export { Slider }
