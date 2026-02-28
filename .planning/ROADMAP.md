@@ -11,9 +11,10 @@
 
 | Phase | Name | Requirements | Status |
 |-------|------|-------------|--------|
-| 1 | Build & Config Recovery | 75 | Not Started |
-| 2 | UI & Routing Restoration | 26 | Not Started |
-| 3 | AI Agent & Logic Hardening | 19 | Not Started |
+| 1 | Build & Config Recovery | 75 | ✅ Done |
+| 2 | UI & Routing Restoration | 26 | ✅ Done |
+| 3 | AI Agent & Logic Hardening | 19 | ✅ Done |
+| 4 | AI Security Test Suite | 4 | Not Started |
 
 ---
 
@@ -37,7 +38,7 @@
 7. Both hooks (`use-mobile.tsx`, `use-toast.ts`) are syntactically valid TypeScript with correct API usage
 8. `npm run dev` starts the Next.js dev server (may still show component errors — those are Phase 2)
 
-**Status:** Not Started
+**Status:** ✅ Done
 
 ---
 
@@ -66,7 +67,7 @@
 7. All renamed UI component files (`ali.tsx`, `doctor.tsx`, etc.) are either renamed back or import paths consistently resolve
 8. The app loads in the browser at `localhost:3000` without runtime React errors
 
-**Status:** Not Started
+**Status:** ✅ Done
 
 ---
 
@@ -94,6 +95,33 @@
 6. `wikipediaAnswerPrompt` is defined and instructs the model to answer using Wikipedia content
 7. The full flow (`answerQuestionWithWikipedia`) executes end-to-end: question → Wikipedia search → extract → AI answer → structured output with `text` and `urls`
 
+**Status:** ✅ Done
+
+---
+
+## Phase 4: AI Security Test Suite
+
+**Goal:** Scaffold a robust Jest test suite that validates the AI agent's resilience against prompt injection, schema breakage, API failures, and context overflow attacks.
+
+**Depends on:** Phase 3 (AI Agent flow must be fully restored before testing)
+
+**Requirements:** SEC-01, SEC-02, SEC-03, SEC-04
+
+**Research needs:** Unlikely — Jest/ts-jest patterns are well-known; mocking Genkit is straightforward
+
+**Research topics:**
+- Jest mocking patterns for `node-fetch` and Genkit AI instances
+- Zod schema validation error handling patterns
+
+**Success Criteria:**
+1. Jest is configured with TypeScript support and `@/` path alias
+2. `tests/ai/prompt-injection.test.ts` validates defense against instruction override attempts
+3. `tests/ai/schema-breakage.test.ts` validates graceful handling of malformed LLM output
+4. `tests/ai/api-outage.test.ts` validates resilience against Wikipedia API failures (empty, 500, timeout)
+5. `tests/ai/context-overflow.test.ts` validates handling of absurdly large inputs
+6. All 20 test cases pass with fully mocked dependencies (no real API calls)
+7. `npm test` completes in under 60 seconds
+
 **Status:** Not Started
 
 ---
@@ -104,6 +132,7 @@
 Phase 1: Build & Config Recovery
     └──► Phase 2: UI & Routing Restoration
               └──► Phase 3: AI Agent & Logic Hardening
+                        └──► Phase 4: AI Security Test Suite
 ```
 
 All phases are strictly sequential — each depends on the previous.
