@@ -1,27 +1,21 @@
 import * as React from 'react';
 
-import {cn} from '@/lib/utils';
+import { cn } from '@/lib/utils';
 
 const Textarea = React.forwardRef<HTMLTextAreaElement, React.ComponentProps<'textarea'>>(
-  ({className, ...props}, ref) => {
+  ({ className, ...props }, ref) => {
     return (
-    
-    const TableCell = React.forwardRef<
-      HTMLTableCellElement,
-      React.TdHTMLAttributes<HTMLTableCellElement>
-    >(({ className, ...props }, ref) => (
-      <td
+      <textarea
+        className={cn(
+          'flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm',
+          className
+        )}
         ref={ref}
-        className={cn("p-4 align-middle [&:has([role=checkbox])]:pr-0", className)}
         {...props}
-      />
-    ))
-    TableCell.displayName = "TableCell"
-    
       />
     );
   }
 );
 Textarea.displayName = 'Textarea';
 
-export {Textarea};
+export { Textarea };
