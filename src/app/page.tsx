@@ -4,6 +4,7 @@ import React, { useState, FormEvent } from 'react';
 import { ChatContainer } from '@/components/wiki-agent/chat-container';
 import { Message } from '@/components/wiki-agent/chat-message';
 import { Send, Globe } from 'lucide-react';
+import { answerQuestionWithWikipedia } from '@/ai/flows/answer-question-with-wikipedia';
 
 export default function WikiAgentPage() {
     const [messages, setMessages] = useState<Message[]>([]);
@@ -21,21 +22,32 @@ export default function WikiAgentPage() {
         };
 
         setMessages((prev) => [...prev, userMessage]);
+        const question = input.trim();
         setInput('');
         setIsLoading(true);
 
-        // TODO: Phase 3 will connect this to the Genkit AI flow
-        // For now, add a placeholder response
-        const assistantMessage: Message = {
-            id: crypto.randomUUID(),
-            role: 'assistant',
-            content: 'WikiAgent is being connected to the AI backend. This will be functional after Phase 3.',
-        };
+        try {
+            const result = await answerQuestionWithWikipedia({ question });
 
-        setTimeout(() => {
+            const assistantMessage: Message = {
+                id: crypto.randomUUID(),
+                role: 'assistant',
+                content: result.text,
+                sources: result.urls,
+            };
+
             setMessages((prev) => [...prev, assistantMessage]);
+        } catch (error) {
+            console.error('Error calling WikiAgent:', error);
+            const errorMessage: Message = {
+                id: crypto.randomUUID(),
+                role: 'assistant',
+                content: 'Sorry, I encountered an error while searching Wikipedia. Please try again.',
+            };
+            setMessages((prev) => [...prev, errorMessage]);
+        } finally {
             setIsLoading(false);
-        }, 500);
+        }
     };
 
     return (
