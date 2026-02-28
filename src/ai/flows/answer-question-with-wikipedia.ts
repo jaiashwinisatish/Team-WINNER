@@ -110,8 +110,21 @@ const answerQuestionWithWikipediaFlow = ai.defineFlow(
     outputSchema: AnswerQuestionWithWikipediaOutputSchema,
   },
   async (input) => {
-    const { output } = await wikipediaAnswerPrompt(input);
-    return output!;
+    try {
+      const { output } = await wikipediaAnswerPrompt(input);
+      return output!;
+    } catch (error: any) {
+      console.warn('Primary model failed, falling back to gemini-2.5-flash-lite. Error:', error.message);
+      try {
+        const { output } = await wikipediaAnswerPrompt(input, {
+          model: 'googleai/gemini-2.5-flash-lite',
+        } as any);
+        return output!;
+      } catch (fallbackError: any) {
+        console.error('Fallback model also failed:', fallbackError.message);
+        throw fallbackError;
+      }
+    }
   }
 );
 
