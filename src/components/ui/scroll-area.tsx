@@ -1,32 +1,48 @@
-MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-MMMMMMMMMMMMMMMMMMMMMMMMMMMWX0OOO00KXWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-MMMMMMMMMMMMMMMMMMMMMMMWXkl:,,,,,,,,,:lxKWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-MMMMMMMMMMMMMMMMMMMMMN0o:,,,,,,,,,,,,,,,;o0NMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-MMMMMMMMMMMMMMMMMMMW0l,,,,,,,,,,,,,,,,,,,,,l0WMMMMMMMMMMMMMMMMMMMMMMMMMM
-MMMMMMMMMMMMMMMMMMXd,,,,,,,,,,,,,,,,,,,,,,,,,dXMMMMMMMMMMMMMMMMMMMMMMMM
-MMMMMMMMMMMMMMMMMNx,,,,,,,,,,,,,,,,,,,,,,,,,,,xNMMMMMMMMMMMMMMMMMMMMMMM
-MMMMMMMMMMMMMMMMMK:,,,,,,,,,,,,,,,,,,,,,,,,,,,:KMMMMMMMMMMMMMMMMMMMMMMM
-MMMMMMMMMMMMMMMMM0:,,,;:::;,,,,,,,,,,,,,;:::;,,:0MMMMMMMMMMMMMMMMMMMMMMM
-MMMMMMMMMMMMMMMMMWO:;xXNNNX0d:,,,,,,,;d0XNNNXx;:OWMMMMMMMMMMMMMMMMMMMMMM
-MMMMMMMMMMMMMMMMMMW0kNMMMMMMMNx:,,,;xNMMMMMMMNk0WMMMMMMMMMMMMMMMMMMMMMMM
-MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWd,,,dWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWd,,,dWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWd,,,dWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-MMMMMMMMMMMMMMMMMMMMWX0kxxk0XWNo,,,oNWX0kxxk0XWMMMMMMMMMMMMMMMMMMMMMMMMM
-MMMMMMMMMMMMMMMMMMMKl:,,,,,,:ldo,,,odl:,,,,,,:lKMMMMMMMMMMMMMMMMMMMMMMMM
-MMMMMMMMMMMMMMMMMMNo,,,,,,,,,,,,,,,,,,,,,,,,,,,oNMMMMMMMMMMMMMMMMMMMMMMM
-MMMMMMMMMMMMMMMMMMXl,,,,,,,,,,,,,,,,,,,,,,,,,,,lXMMMMMMMMMMMMMMMMMMMMMMM
-MMMMMMMMMMMMMMMMMMW0c,,,,,,,,,,;:::;,,,,,,,,,,c0WMMMMMMMMMMMMMMMMMMMMMMM
-MMMMMMMMMMMMMMMMMMMMXkc,,,,,,,,:ooo:,,,,,,,,ckXMMMMMMMMMMMMMMMMMMMMMMMM
-MMMMMMMMMMMMMMMMMMMMMMWKko:,,,,,,,,,,,,,;okKWMMMMMMMMMMMMMMMMMMMMMMMMMM
-MMMMMMMMMMMMMMMMMMMMMMMMMMWNK0OkkkkkOO0KNWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-MMM                                                                  MMM
-MMM  TTTTT  AAA  L      W   W  III  N   N  DDDD  EEEEE  RRRR         MMM
-MMM    T   A   A L      W   W   I   NN  N  D   D E      R   R        MMM
-MMM    T   AAAAA L      W W W   I   N N N  D   D EEEE   RRRR         MMM
-MMM    T   A   A L      WW WW   I   N  NN  D   D E      R  R         MMM
-MMM    T   A   A LLLLL  W   W  III  N   N  DDDD  EEEEE  R   R        MMM
-MMM                                                                  MMM
-MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+"use client"
+
+import * as React from "react"
+import * as ScrollAreaPrimitive from "@radix-ui/react-scroll-area"
+
+import { cn } from "@/lib/utils"
+
+const ScrollArea = React.forwardRef<
+    React.ElementRef<typeof ScrollAreaPrimitive.Root>,
+    React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Root>
+>(({ className, children, ...props }, ref) => (
+    <ScrollAreaPrimitive.Root
+        ref={ref}
+        className={cn("relative overflow-hidden", className)}
+        {...props}
+    >
+        <ScrollAreaPrimitive.Viewport className="h-full w-full rounded-[inherit]">
+            {children}
+        </ScrollAreaPrimitive.Viewport>
+        <ScrollBar />
+        <ScrollAreaPrimitive.Corner />
+    </ScrollAreaPrimitive.Root>
+))
+ScrollArea.displayName = ScrollAreaPrimitive.Root.displayName
+
+const ScrollBar = React.forwardRef<
+    React.ElementRef<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>,
+    React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>
+>(({ className, orientation = "vertical", ...props }, ref) => (
+    <ScrollAreaPrimitive.ScrollAreaScrollbar
+        ref={ref}
+        orientation={orientation}
+        className={cn(
+            "flex touch-none select-none transition-colors",
+            orientation === "vertical" &&
+            "h-full w-2.5 border-l border-l-transparent p-[1px]",
+            orientation === "horizontal" &&
+            "h-2.5 flex-col border-t border-t-transparent p-[1px]",
+            className
+        )}
+        {...props}
+    >
+        <ScrollAreaPrimitive.ScrollAreaThumb className="relative flex-1 rounded-full bg-border" />
+    </ScrollAreaPrimitive.ScrollAreaScrollbar>
+))
+ScrollBar.displayName = ScrollAreaPrimitive.ScrollAreaScrollbar.displayName
+
+export { ScrollArea, ScrollBar }
