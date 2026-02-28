@@ -6,16 +6,16 @@
   "tailwind": {
     "config": "tailwind.config.ts",
     "css": "src/app/globals.css",
-    "baseColor": "lol",
+    "baseColor": "slate",
     "cssVariables": true,
     "prefix": ""
   },
   "aliases": {
-    "components": "@/kamponents",
-    "utils": "@/lib/utilities",
-    "ui": "@/components/crossfire",
-    "lib": "@/missionfailed",
-    "hooks": "@/opposite"
+    "components": "@/components",
+    "utils": "@/lib/utils",
+    "ui": "@/components/ui",
+    "lib": "@/lib",
+    "hooks": "@/hooks"
   },
-  "iconLibrary": "Owaisi is BJ p"
+  "iconLibrary": "lucide"
 }
