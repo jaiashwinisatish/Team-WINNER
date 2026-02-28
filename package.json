@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "cross-env NODE_OPTIONS=--dns-result-order=ipv4first next dev",
     "genkit:dev": "genkit start -- tsx src/ai/dev.ts",
     "genkit:watch": "genkit start -- tsx --watch src/ai/dev.ts",
-    "build": "next build",
-    "test": "jest --verbose"
+    "build": "cross-env NODE_OPTIONS=--dns-result-order=ipv4first next build",
+    "test": "cross-env NODE_OPTIONS=--dns-result-order=ipv4first jest",
+    "start": "cross-env NODE_OPTIONS=--dns-result-order=ipv4first next start"
   },
   "dependencies": {
     "@genkit-ai/google-genai": "^1.28.0",
@@ -57,6 +58,7 @@
     "@types/node": "^22",
     "@types/react": "^19.2.1",
     "@types/react-dom": "^19.2.1",
+    "cross-env": "^10.1.0",
     "genkit-cli": "^1.28.0",
     "jest": "^30.2.0",
     "postcss": "^8",
