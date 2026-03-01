@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🌟 WikiAgent — AI-Powered Wikipedia Assistant
+# 🌟 WikiAgent AI-Powered Wikipedia Assistant
 
 ### *Hackathon Edition: Bug-Fix Challenge & Security Hardening*
 
