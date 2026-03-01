@@ -1,4 +1,4 @@
-# WikiAgent — Roadmap
+# WikiAgent — complete Roadmap
 
 > **Core Value:** Restore full end-to-end WikiAgent functionality
 > **Total v1 Requirements:** 120
